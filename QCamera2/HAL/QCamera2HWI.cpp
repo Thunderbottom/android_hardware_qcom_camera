@@ -3808,12 +3808,12 @@ int32_t QCamera2HardwareInterface::sendEvtNotify(int32_t msg_type,
 int32_t QCamera2HardwareInterface::processAutoFocusEvent(cam_auto_focus_data_t &focus_data)
 {
     int32_t ret = NO_ERROR;
-    CDBG_HIGH("%s: E",__func__);
+    CDBG("%s: E",__func__);
 
     m_currentFocusState = focus_data.focus_state;
 
     cam_focus_mode_type focusMode = mParameters.getFocusMode();
-    CDBG_HIGH("[AF_DBG] %s: focusMode=%d, m_currentFocusState=%d, m_bAFRunning=%d",
+    CDBG("[AF_DBG] %s: focusMode=%d, m_currentFocusState=%d, m_bAFRunning=%d",
          __func__, focusMode, m_currentFocusState, isAFRunning());
 
     switch (focusMode) {
@@ -3865,16 +3865,16 @@ int32_t QCamera2HardwareInterface::processAutoFocusEvent(cam_auto_focus_data_t &
     case CAM_FOCUS_MODE_FIXED:
     case CAM_FOCUS_MODE_EDOF:
     default:
-        CDBG_HIGH("%s: no ops for autofocus event in focusmode %d", __func__, focusMode);
+        CDBG("%s: no ops for autofocus event in focusmode %d", __func__, focusMode);
         break;
     }
 
     // we save cam_auto_focus_data_t.focus_pos to parameters,
     // in any focus mode.
-    CDBG_HIGH("%s, update focus position: %d", __func__, focus_data.focus_pos);
+    CDBG("%s, update focus position: %d", __func__, focus_data.focus_pos);
     mParameters.updateCurrentFocusPosition(focus_data.focus_pos);
 
-    CDBG_HIGH("%s: X",__func__);
+    CDBG("%s: X",__func__);
     return ret;
 }
 
