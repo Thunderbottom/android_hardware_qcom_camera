@@ -355,7 +355,6 @@ private:
     bool isRegularCapture();
     bool isCACEnabled();
     bool isPreviewRestartEnabled();
-    bool is4k2kResolution(cam_dimension_t* resolution);
     bool isCaptureShutterEnabled();
     bool isAFRunning();
     bool needReprocess();
