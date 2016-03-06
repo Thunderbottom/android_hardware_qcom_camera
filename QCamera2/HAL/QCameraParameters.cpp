@@ -607,10 +607,6 @@ const QCameraParameters::QCameraMap QCameraParameters::CDS_MODES_MAP[] = {
 #define MIN_PP_BUF_CNT 1
 #define TOTAL_RAM_SIZE_512MB 536870912
 
-static uint32_t mPrvwExpTimeUs = 0;
-static bool mIsManualIso = false;
-static bool mIsManualExpTime = false;
-
 /*===========================================================================
  * FUNCTION   : QCameraParameters
  *
@@ -671,7 +667,10 @@ QCameraParameters::QCameraParameters()
       m_bDisplayFrame(true),
       m_bAeBracketingEnabled(false),
       mFlashValue(CAM_FLASH_MODE_OFF),
-      mFlashDaemonValue(CAM_FLASH_MODE_OFF)
+      mFlashDaemonValue(CAM_FLASH_MODE_OFF),
+      mPrvwExpTimeUs(0),
+      mIsManualIso(false),
+      mIsManualExpTime(false)
 {
     char value[PROPERTY_VALUE_MAX];
 #ifndef DISABLE_DEBUG_LOG
@@ -754,8 +753,10 @@ QCameraParameters::QCameraParameters(const String8 &params)
     mHfrMode(CAM_HFR_MODE_OFF),
     m_bAeBracketingEnabled(false),
     mFlashValue(CAM_FLASH_MODE_OFF),
-    mFlashDaemonValue(CAM_FLASH_MODE_OFF)
-
+    mFlashDaemonValue(CAM_FLASH_MODE_OFF),
+    mPrvwExpTimeUs(0),
+    mIsManualIso(false),
+    mIsManualExpTime(false)
 {
     memset(&m_LiveSnapshotSize, 0, sizeof(m_LiveSnapshotSize));
     m_pTorch = NULL;
