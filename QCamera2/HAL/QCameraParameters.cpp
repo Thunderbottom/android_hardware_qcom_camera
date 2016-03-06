@@ -3859,6 +3859,9 @@ int QCameraParameters::getPrvwExpTime()
 
 bool QCameraParameters::isManualMode()
 {
+    if (mIsManualIso && !mIsManualExpTime)
+        setPrvwExpTime(0);
+
     return mIsManualIso || mIsManualExpTime;
 }
 
