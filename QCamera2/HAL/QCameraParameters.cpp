@@ -670,7 +670,8 @@ QCameraParameters::QCameraParameters()
       mFlashDaemonValue(CAM_FLASH_MODE_OFF),
       mPrvwExpTimeUs(0),
       mIsManualIso(false),
-      mIsManualExpTime(false)
+      mIsManualExpTime(false),
+      m_bIs60HzAntibanding(false)
 {
     char value[PROPERTY_VALUE_MAX];
 #ifndef DISABLE_DEBUG_LOG
@@ -756,7 +757,8 @@ QCameraParameters::QCameraParameters(const String8 &params)
     mFlashDaemonValue(CAM_FLASH_MODE_OFF),
     mPrvwExpTimeUs(0),
     mIsManualIso(false),
-    mIsManualExpTime(false)
+    mIsManualExpTime(false),
+    m_bIs60HzAntibanding(false)
 {
     memset(&m_LiveSnapshotSize, 0, sizeof(m_LiveSnapshotSize));
     m_pTorch = NULL;
@@ -3873,6 +3875,11 @@ uint32_t QCameraParameters::getCameraId()
         return 1;
 }
 
+bool QCameraParameters::is60HzAntibanding()
+{
+    return m_bIs60HzAntibanding;
+}
+
 /*===========================================================================
  * FUNCTION   : updateParameters
  *
@@ -6061,6 +6068,12 @@ int32_t QCameraParameters::setAntibanding(const char *antiBandingStr)
             if(value == CAM_ANTIBANDING_MODE_AUTO) {
                value = getAutoFlickerMode();
             }
+
+            if (value == CAM_ANTIBANDING_MODE_60HZ)
+                m_bIs60HzAntibanding = true;
+            else
+                m_bIs60HzAntibanding = false;
+
             return AddSetParmEntryToBatch(m_pParamBuf,
                                           CAM_INTF_PARM_ANTIBANDING,
                                           sizeof(value),
