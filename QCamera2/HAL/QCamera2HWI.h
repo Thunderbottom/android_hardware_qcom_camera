@@ -468,7 +468,11 @@ private:
     void captureDone();
 
     void processAntishakeAlgo(QCamera2HardwareInterface *pme,
-                            float real_gain);
+                            float real_gain, float exp_time);
+    void processHfrExpTime(QCamera2HardwareInterface *pme,
+                            float real_gain, float exp_time,
+                            uint32_t hfr_mode,
+                            bool is_60Hz);
 
     static void copyList(cam_dimension_t* src_list,
                    cam_dimension_t* dst_list, uint8_t len);
@@ -655,6 +659,7 @@ private:
     bool mAdvancedCaptureConfigured;
     bool mPreviewFrameSkipValid;
     cam_frame_idx_range_t mPreviewFrameSkipIdxRange;
+    uint64_t mHfrFrameCount;
 };
 
 }; // namespace qcamera
