@@ -1088,7 +1088,8 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(int cameraId)
       mInputCount(0),
       mAdvancedCaptureConfigured(false),
       mPreviewFrameSkipValid(0),
-      mVideoFrameCnt(0)
+      mVideoFrameCnt(0),
+      mCameraFrameCnt(0)
 {
     getLogLevel();
     mCameraDevice.common.tag = HARDWARE_DEVICE_TAG;
