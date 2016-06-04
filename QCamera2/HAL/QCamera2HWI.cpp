@@ -1223,14 +1223,16 @@ int QCamera2HardwareInterface::openCamera()
         return ALREADY_EXISTS;
     }
 
-
-    mCameraHandle = camera_open(mCameraId);
-    if (!mCameraHandle) {
+    for (i = 0; i < 5; i++) {
         mCameraHandle = camera_open(mCameraId);
-        if (!mCameraHandle) {
-            ALOGE("camera_open failed.");
-            return UNKNOWN_ERROR;
-        }
+        if (mCameraHandle)
+            break;
+        usleep(500 * 1000);
+    }
+
+    if (!mCameraHandle) {
+        ALOGE("camera_open failed.");
+        return UNKNOWN_ERROR;
     }
     if (NULL == gCamCapability[mCameraId])
         initCapabilities(mCameraId,mCameraHandle);
