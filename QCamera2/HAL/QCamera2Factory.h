@@ -54,6 +54,7 @@ private:
     int cameraDeviceOpen(int camera_id, struct hw_device_t **hw_device);
     static int camera_device_open(const struct hw_module_t *module, const char *id,
                 struct hw_device_t **hw_device);
+    bool can_talk_to_sensormanager();
 
     int setTorchMode(const char* camera_id, bool on);
 public:
@@ -63,6 +64,7 @@ private:
     int torch0Fd;
     int torch1Fd;
     int mNumOfCameras;
+    android::Mutex gCameraWrapperLock;
 };
 
 }; /*namespace qcamera*/
